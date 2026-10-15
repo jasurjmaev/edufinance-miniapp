@@ -1,0 +1,1001 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#101329">
+<title>EduFinance Learning</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root {
+  --bg:#0d1022;
+  --panel:#171b35;
+  --panel2:#202542;
+  --text:#f7f8ff;
+  --muted:#a3accb;
+  --purple:#9b8cff;
+  --gold:#f4d28b;
+  --line:#ffffff12;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  padding:0 0 105px;
+}
+button{font:inherit;cursor:pointer}
+button:focus-visible{outline:2px solid var(--purple)}
+.app{max-width:540px;margin:auto;padding:22px 18px 20px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{
+  width:43px;height:43px;border-radius:15px;display:grid;place-items:center;
+  background:linear-gradient(135deg,#a79aff,#6651db);
+  box-shadow:0 6px 22px #7864ff35;font-size:22px
+}
+.brand strong{display:block;font-size:16px;letter-spacing:.2px}
+.brand small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.icon-btn{
+  width:43px;height:43px;border:1px solid var(--line);border-radius:15px;
+  color:white;background:var(--panel);font-size:19px;position:relative
+}
+.dot{position:absolute;right:8px;top:8px;width:7px;height:7px;border-radius:50%;background:#65e6bd}
+.eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--purple);font-weight:700}
+h1{font-size:clamp(28px,7vw,36px);line-height:1.18;letter-spacing:-1.1px;margin:10px 0}
+.greeting-name{
+  background:linear-gradient(90deg,#c4baff,#f3d59a);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.subtitle{font-size:14px;line-height:1.65;color:var(--muted);margin:10px 0 22px}
+.hero{
+  position:relative;overflow:hidden;border-radius:27px;padding:23px;
+  background:linear-gradient(135deg,#28264f 0%,#473887 55%,#7658a9 100%);
+  border:1px solid #ffffff19;box-shadow:0 16px 42px #00000020
+}
+.hero:after{
+  content:"✦";position:absolute;right:19px;top:5px;font-size:100px;
+  color:#ffffff12;transform:rotate(15deg);pointer-events:none
+}
+.hero-top{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.pill{
+  display:inline-flex;align-items:center;gap:6px;padding:8px 11px;border-radius:30px;
+  font-size:11px;font-weight:700;background:#ffffff15;border:1px solid #ffffff1c
+}
+.hero h2{font-size:23px;line-height:1.3;max-width:270px;margin:22px 0 8px}
+.hero p{color:#e2dcff;font-size:13px;line-height:1.6;margin:0 0 20px;max-width:280px}
+.primary{
+  border:0;border-radius:13px;padding:13px 17px;background:#f3d69b;color:#29213e;
+  font-weight:800;font-size:13px;box-shadow:0 6px 18px #00000016
+}
+.hero-art{position:absolute;right:15px;bottom:44px;font-size:63px;filter:drop-shadow(0 8px 14px #17112e60)}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:29px 0 14px}
+.section-head h2{font-size:18px;letter-spacing:-.3px;margin:0}
+.link{border:0;background:transparent;color:#b8adff;font-size:12px;font-weight:700;padding:6px 0}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.stat{padding:15px 10px;border-radius:18px;background:var(--panel);border:1px solid var(--line);min-width:0}
+.stat-icon{font-size:21px}
+.stat strong{display:block;font-size:20px;margin:12px 0 5px}
+.stat span{font-size:10px;line-height:1.4;color:var(--muted);display:block}
+.goal{padding:18px;border:1px solid var(--line);border-radius:20px;background:var(--panel)}
+.goal-row{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.goal-row strong{font-size:13px}
+.goal-row span{font-size:12px;color:var(--purple);font-weight:700}
+.track{height:7px;background:#ffffff12;border-radius:20px;margin:15px 0 9px;overflow:hidden}
+.fill{height:100%;width:35%;border-radius:20px;background:linear-gradient(90deg,#9584ff,#f1d49a)}
+.goal small{font-size:11px;color:var(--muted)}
+.courses{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.course{
+  min-height:148px;text-align:left;padding:16px;border-radius:20px;
+  color:var(--text);border:1px solid var(--line);background:var(--panel);
+  transition:transform .15s,border-color .15s
+}
+.course:active{transform:scale(.98)}
+.course-top{display:flex;justify-content:space-between;align-items:center}
+.course-emoji{width:43px;height:43px;display:grid;place-items:center;border-radius:14px;background:#ffffff0d;font-size:23px}
+.level{font-size:10px;color:var(--muted);font-weight:700}
+.course h3{font-size:15px;margin:16px 0 6px}
+.course p{font-size:11px;color:var(--muted);margin:0;line-height:1.5}
+.course.premium{background:linear-gradient(145deg,#282440,#3b2d4c);border-color:#f4d28b35}
+.tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.tool{
+  text-align:center;padding:16px 5px;border:1px solid var(--line);border-radius:17px;
+  background:var(--panel);color:var(--text)
+}
+.tool .emoji{font-size:24px}
+.tool strong{display:block;font-size:11px;margin-top:10px}
+.tool small{display:block;font-size:10px;color:var(--muted);margin-top:5px}
+.premium-banner{
+  margin-top:28px;padding:21px;border-radius:22px;
+  background:linear-gradient(120deg,#453520,#302642 78%);border:1px solid #f4d28b35
+}
+.premium-banner .crown{font-size:25px}
+.premium-banner h3{font-size:19px;margin:12px 0 7px}
+.premium-banner p{font-size:12px;color:#d3c6d9;line-height:1.6;margin:0 0 16px}
+.bottom-nav{
+  position:fixed;z-index:5;bottom:0;left:0;right:0;
+  background:#11142aef;backdrop-filter:blur(18px);
+  border-top:1px solid var(--line);padding:10px max(12px,env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom));
+}
+.nav-inner{max-width:540px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.nav-item{
+  position:relative;display:flex;flex-direction:column;align-items:center;gap:5px;
+  border:0;background:transparent;color:#858eaf;font-size:10px;padding:6px 2px
+}
+.nav-item .nav-icon{font-size:20px}
+.nav-item.active{color:#c4b8ff}
+.nav-item.active:before{content:"";position:absolute;top:-10px;width:24px;height:2px;background:#a89aff;border-radius:5px}
+.profile-fab{
+  position:fixed;right:max(17px,calc((100vw - 540px)/2 + 16px));
+  bottom:91px;z-index:8;width:55px;height:55px;border:2px solid #c6baff;
+  border-radius:19px;background:linear-gradient(145deg,#8f7aff,#5a43c6);
+  color:white;font-weight:800;font-size:17px;box-shadow:0 8px 28px #6d54f866
+}
+.profile-fab small{display:block;font-size:8px;letter-spacing:.3px;margin-top:1px}
+.overlay{
+  display:none;position:fixed;inset:0;z-index:20;background:#050713bb;
+  backdrop-filter:blur(5px);align-items:flex-end;justify-content:center
+}
+.overlay.show{display:flex}
+.sheet{
+  width:100%;max-width:540px;max-height:85vh;overflow:auto;padding:24px 20px;
+  border-radius:26px 26px 0 0;background:#191d37;border:1px solid var(--line);
+  padding-bottom:calc(24px + env(safe-area-inset-bottom))
+}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.sheet h2{font-size:21px;margin:0}
+.close{border:0;border-radius:12px;width:37px;height:37px;background:#ffffff10;color:white;font-size:20px}
+.profile-card{display:flex;align-items:center;gap:13px;padding:16px;border-radius:18px;background:#ffffff08;margin-bottom:20px}
+.avatar{width:53px;height:53px;border-radius:17px;background:linear-gradient(135deg,#b9aaff,#6651cf);display:grid;place-items:center;font-weight:800;font-size:19px}
+.profile-card strong{display:block;font-size:15px}
+.profile-card small{display:block;color:var(--muted);margin-top:5px;font-size:12px;overflow-wrap:anywhere}
+.setting-label{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:20px 0 10px}
+.setting{
+  width:100%;display:flex;align-items:center;gap:12px;text-align:left;
+  border:1px solid var(--line);border-radius:15px;background:#ffffff05;color:white;
+  padding:15px;margin-bottom:9px
+}
+.setting .emoji{font-size:20px}
+.setting .detail{flex:1}
+.setting strong{font-size:13px;display:block}
+.setting small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.setting select{max-width:105px;background:#252947;color:white;border:1px solid #ffffff20;border-radius:9px;padding:8px}
+.notice{padding:15px;border-radius:14px;background:#ffffff08;color:var(--muted);font-size:12px;line-height:1.6}
+@media(min-width:540px){body{padding-top:8px}.bottom-nav{border-radius:20px 20px 0 0}}
+
+/* PREMIUM TYPOGRAPHY */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg: #0a0d19;
+  --panel: #121729;
+  --panel2: #191f34;
+  --text: #f5f6fc;
+  --muted: #929bb5;
+  --purple: #a99aff;
+  --gold: #e8cb91;
+  --line: rgba(255,255,255,.075);
+}
+
+body {
+  font-family: 'Manrope', 'Inter', sans-serif;
+  background:
+    radial-gradient(ellipse at 85% 0%, rgba(91,70,180,.12), transparent 38%),
+    var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, strong, button {
+  font-family: 'Manrope', sans-serif;
+}
+
+h1 {
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1.15;
+}
+
+h2, h3 { letter-spacing: -.45px; }
+
+.app {
+  animation: pageEnter .65s cubic-bezier(.2,.7,.2,1) both;
+}
+
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* REFINED SURFACES */
+.hero {
+  background:
+    radial-gradient(ellipse at 100% 0%, #8b78ff36, transparent 48%),
+    linear-gradient(135deg, #1c2340, #30264e 68%, #28203d);
+  border: 1px solid rgba(198,183,255,.17);
+  box-shadow: 0 22px 60px rgba(0,0,0,.23);
+}
+
+.card, .stat, .goal, .course, .tool {
+  border-color: var(--line);
+  box-shadow: 0 8px 28px rgba(0,0,0,.08);
+  transition:
+    transform .28s cubic-bezier(.2,.8,.2,1),
+    border-color .28s ease,
+    background-color .28s ease,
+    box-shadow .28s ease;
+}
+
+.course:hover, .tool:hover {
+  transform: translateY(-4px);
+  border-color: rgba(169,154,255,.38);
+  box-shadow: 0 14px 32px rgba(0,0,0,.18);
+}
+
+.primary, .icon-btn, .profile-fab, .nav-item, .setting {
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform .18s ease,
+    filter .2s ease,
+    background-color .25s ease;
+}
+
+button:active {
+  transform: scale(.97);
+  filter: brightness(1.13);
+}
+
+.primary {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(232,203,145,.12);
+}
+
+.primary::after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -100%;
+  width: 55%;
+  height: 220%;
+  transform: rotate(25deg);
+  background: linear-gradient(90deg, transparent, #ffffff55, transparent);
+  transition: left .55s ease;
+}
+
+.primary:hover::after { left: 150%; }
+
+/* SMOOTH SECTION REVEAL */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity .55s ease,
+    transform .55s cubic-bezier(.2,.7,.2,1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* PROFILE SHEET */
+.overlay {
+  opacity: 0;
+  transition: opacity .28s ease;
+  pointer-events: none;
+}
+
+.overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sheet {
+  transform: translateY(35px);
+  transition: transform .38s cubic-bezier(.16,1,.3,1);
+  border-color: rgba(169,154,255,.14);
+  box-shadow: 0 -20px 70px rgba(0,0,0,.28);
+}
+
+.overlay.show .sheet { transform: translateY(0); }
+
+/* PREMIUM NAVIGATION */
+.bottom-nav {
+  background: rgba(10,13,25,.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.nav-item .nav-icon {
+  transition: transform .25s cubic-bezier(.2,.8,.2,1);
+}
+
+.nav-item.active .nav-icon {
+  transform: translateY(-2px) scale(1.08);
+}
+
+.profile-fab {
+  box-shadow: 0 8px 28px rgba(109,84,248,.24);
+}
+
+.profile-fab:hover {
+  transform: translateY(-3px);
+}
+
+/* ACCESSIBILITY AND MOBILE PERFORMANCE */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .app { padding-left: 14px; padding-right: 14px; }
+  .hero { padding: 19px; }
+  .stat { padding: 12px 8px; }
+  .stat strong { font-size: 17px; }
+  .courses { gap: 8px; }
+}
+
+
+
+/* EduFinance — premium dizayn */
+:root {
+  background: var(--bg) !important;
+  --panel: #141b2f;
+  --text: #f4f7ff;
+  --muted: #98a4bd;
+  --accent: #7c8cff;
+  --border: rgba(255, 255, 255, 0.09);
+}
+
+body {
+  font-family: 'Inter', 'Manrope', sans-serif !important;
+  background: var(--bg) !important;
+  color: var(--text);
+}
+
+button, .btn {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+button:active, .btn:active {
+  transform: scale(0.97);
+  opacity: 0.85;
+}
+
+.card, .course-card, .panel {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.card:hover, .course-card:hover, .panel:hover {
+  transform: translateY(-3px);
+  border-color: rgba(124, 140, 255, 0.4);
+}
+
+
+/* Premium card refinement */
+.card,
+.course-card,
+.panel {
+  background: linear-gradient(
+    145deg,
+    rgba(28, 38, 64, 0.96),
+    rgba(17, 24, 43, 0.98)
+  );
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 20px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+}
+
+button,
+.btn,
+.icon-btn {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+.btn:focus-visible {
+  outline: 2px solid #8b9aff;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .card,
+  .course-card,
+  .panel {
+    animation: cardAppear 0.45s ease both;
+  }
+
+  @keyframes cardAppear {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Strong premium hover effect */
+.card,
+.course-card,
+.panel,
+button,
+.btn,
+.icon-btn {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover,
+  .course-card:hover,
+  .panel:hover {
+    transform: translateY(-7px) scale(1.015);
+    border-color: rgba(124, 140, 255, 0.75);
+    box-shadow: 0 18px 40px rgba(75, 95, 220, 0.22);
+  }
+
+  button:hover,
+  .btn:hover,
+  .icon-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.15);
+  }
+}
+
+.card:active,
+.course-card:active,
+.panel:active {
+  transform: scale(0.985);
+}
+
+/* Premium typography */
+body,
+button,
+input,
+textarea,
+select {
+  font-family: 'Inter', 'Manrope', sans-serif !important;
+  letter-spacing: -0.015em;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3,
+.brand strong,
+.section-title {
+  font-family: 'Manrope', 'Inter', sans-serif !important;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+p, small, .muted {
+  line-height: 1.65;
+}
+
+/* Direction-aware page transitions */
+.page-transition {
+  animation: pageEnterRight 320ms cubic-bezier(.22, 1, .36, 1) both;
+  will-change: transform, opacity;
+}
+
+.page-transition.from-left {
+  animation-name: pageEnterLeft;
+}
+
+.page-transition.from-right {
+  animation-name: pageEnterRight;
+}
+
+@keyframes pageEnterRight {
+  from {
+    opacity: 0;
+    transform: translateX(34px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pageEnterLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-34px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    animation: none !important;
+  }
+}
+
+
+/* Direction-aware section motion */
+.section-head,
+.courses,
+.tools {
+  scroll-margin-top: 24px;
+}
+
+.section-motion {
+  animation: sectionFromRight 360ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.section-motion.from-left {
+  animation-name: sectionFromLeft;
+}
+
+@keyframes sectionFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes sectionFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-motion {
+    animation: none !important;
+  }
+}
+
+/* Separate app screens */
+.app-screen {
+  display: none;
+  min-height: 60vh;
+}
+
+.app-screen.active-screen {
+  display: block;
+}
+
+.app-screen.screen-enter-right {
+  animation: screenEnterRight 320ms ease both;
+}
+
+.app-screen.screen-enter-left {
+  animation: screenEnterLeft 320ms ease both;
+}
+
+@keyframes screenEnterRight {
+  from { opacity: 0; transform: translateX(35px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes screenEnterLeft {
+  from { opacity: 0; transform: translateX(-35px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-screen {
+    animation: none !important;
+  }
+}
+
+/* EDUFINANCE Premium */
+.premium-banner {
+  position: relative;
+  overflow: hidden;
+  padding: 26px 22px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #111827, #263449 65%, #3b2c16);
+  border: 1px solid rgba(245, 190, 75, 0.45);
+  color: #fff;
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.18);
+}
+
+.premium-banner h2,
+.premium-banner h3 {
+  color: #f5c76a;
+}
+
+.premium-banner p {
+  color: #e5e7eb;
+  line-height: 1.6;
+}
+
+.premium-price {
+  margin: 18px 0;
+  color: #f5c76a;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.premium-price small {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.premium-features {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.premium-features li {
+  color: #f3f4f6;
+}
+
+.premium-btn {
+  display: block;
+  width: 100%;
+  padding: 14px 18px;
+  border: 0;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #f8d77b, #e8ad3e);
+  color: #222;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.premium-note {
+  margin-top: 12px;
+  font-size: 12px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+</style>
+</head>
+<body>
+<main class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">✦</div>
+      <div><strong>EduFinance</strong><small>LEARNING EXPERIENCE</small></div>
+    </div>
+    <button class="icon-btn" onclick="notifyUser()" aria-label="Bildirishnomalar">♧<span class="dot"></span></button>
+  </header>
+  <div id="screen-home" class="app-screen active-screen"></div>
+  <section>
+    <div class="eyebrow" data-i18n="welcome">SIZNING YANGI BOSQICHINGIZ</div>
+    <h1><span data-i18n="hello">Xush kelibsiz,</span><br><span class="greeting-name" id="userName">Do‘stim</span> ✨</h1>
+    <p class="subtitle" data-i18n="subtitle">Bugun o‘zingizning eng yaxshi versiyangizga yana bir qadam yaqinlashing.</p>
+  </section>
+
+  <section class="hero">
+    <div class="hero-top">
+      <span class="pill">✦ <span data-i18n="featured">TAVSIYA ETILGAN</span></span>
+      <span class="pill">A1 — C1</span>
+    </div>
+    <h2 data-i18n="heroTitle">Bilimingizni yangi darajaga olib chiqing.</h2>
+    <p data-i18n="heroDesc">Qisqa darslar, amaliy mashqlar va shaxsiy rivojlanish yo‘li.</p>
+    <button class="primary" onclick="goTo('courses')" data-i18n="startLearning">O‘rganishni boshlash →</button>
+    <div class="hero-art">🎓</div>
+  </section>
+
+  <div class="section-head"><h2 data-i18n="statsTitle">Sizning rivojlanishingiz</h2><button class="link" onclick="goTo('results')" data-i18n="details">Batafsil ↗</button></div>
+  <section class="stats">
+    <div class="stat"><div class="stat-icon">🔥</div><strong id="streak">0 kun</strong><span data-i18n="streak">Ketma-ket kunlar</span></div>
+    <div class="stat"><div class="stat-icon">📚</div><strong id="words">0</strong><span data-i18n="words">Yangi so‘zlar</span></div>
+    <div class="stat"><div class="stat-icon">🏆</div><strong id="points">0 XP</strong><span data-i18n="points">To‘plangan ball</span></div>
+  </section>
+
+  <div class="section-head"><h2 data-i18n="goalTitle">🎯 Bugungi maqsad</h2><span class="pill" id="goalPercent">0%</span></div>
+  <section class="goal">
+    <div class="goal-row"><strong data-i18n="goalDesc">20 daqiqa o‘rganish</strong><span id="goalTime">0 / 20 daq.</span></div>
+    <div class="track"><div class="fill" id="goalFill"></div></div>
+    <small data-i18n="goalHint">Kichik qadamlar katta natijalarga olib keladi.</small>
+  </section>
+</div>
+
+<div id="screen-courses" class="app-screen">
+  <div class="section-head" id="courses"><h2 data-i18n="coursesTitle">🎓 O‘quv yo‘nalishlari</h2><button class="link" onclick="showMessage('Barcha kurslar tez orada qo‘shiladi.')" data-i18n="allCourses">Barchasi →</button></div>
+  <section class="courses">
+    <button class="course" onclick="openCourse('A1')"><div class="course-top"><span class="course-emoji">🌱</span><span class="level">01 / A1</span></div><h3 data-i18n="a1">Boshlang‘ich</h3><p data-i18n="a1d">Asosiy so‘zlar va jumlalar</p></button>
+    <button class="course" onclick="openCourse('A2')"><div class="course-top"><span class="course-emoji">🌿</span><span class="level">02 / A2</span></div><h3 data-i18n="a2">Elementar</h3><p data-i18n="a2d">Kundalik suhbatlar</p></button>
+    <button class="course" onclick="openCourse('B1')"><div class="course-top"><span class="course-emoji">⚡</span><span class="level">03 / B1</span></div><h3 data-i18n="b1">O‘rta daraja</h3><p data-i18n="b1d">Erkinroq muloqot</p></button>
+    <button class="course" onclick="openCourse('B2')"><div class="course-top"><span class="course-emoji">🚀</span><span class="level">04 / B2</span></div><h3 data-i18n="b2">Yuqori o‘rta</h3><p data-i18n="b2d">Murakkab mavzular</p></button>
+    <button class="course" onclick="openCourse('C1')" style="grid-column:1/-1;min-height:105px"><div class="course-top"><span class="course-emoji">💎</span><span class="level">05 / C1</span></div><h3 data-i18n="c1">Ilg‘or daraja</h3><p data-i18n="c1d">Akademik va professional ingliz tili</p></button>
+  </section>
+
+  <div class="section-head"><h2 data-i18n="toolsTitle">✨ Tezkor vositalar</h2></div>
+  <section class="tools">
+    <button class="tool" onclick="openTool('vocab')"><div class="emoji">📖</div><strong data-i18n="vocab">Lug‘at</strong><small data-i18n="vocabD">Yangi so‘zlar</small></button>
+    <button class="tool" onclick="openTool('quiz')"><div class="emoji">🧠</div><strong data-i18n="quiz">Mini test</strong><small data-i18n="quizD">Bilimingizni sinang</small></button>
+    <button class="tool" onclick="goTo('results')"><div class="emoji">📈</div><strong data-i18n="results">Natijalar</strong><small data-i18n="resultsD">O‘sishingiz</small></button>
+  </section>
+
+  
+<section class="premium-banner">
+  <h2>👑 EDUFINANCE Premium</h2>
+
+  <p>
+    Moliyaviy bilimlaringizni yangi bosqichga olib chiqing!
+  </p>
+
+  <div class="premium-price">
+    25 000 so‘m <small>/ oyiga</small>
+  </div>
+
+  <ul class="premium-features">
+    <li>✅ Barcha darslardan foydalanish</li>
+    <li>✅ Kengaytirilgan moliyaviy lug‘at</li>
+    <li>✅ Batafsil o‘quv statistikasi</li>
+    <li>✅ Yangi dars va mashqlar</li>
+  </ul>
+
+  
+<button class="premium-btn" onclick="sendPremiumRequest()">
+  Premiumni tanlash
+</button>
+
+
+  <p class="premium-note">
+    Hozircha to‘lov amalga oshirilmaydi.
+  </p>
+</section>
+
+
+<div id="screen-results" class="app-screen">
+  <div class="section-head">
+    <h2>📊 Natijalarim</h2>
+  </div>
+
+  <section class="stats">
+    <div class="stat">
+      <div class="stat-icon">🔥</div>
+      <strong>0 kun</strong>
+      <span>Ketma-ket o‘qish</span>
+    </div>
+    <div class="stat">
+      <div class="stat-icon">📚</div>
+      <strong>0 ta</strong>
+      <span>O‘rganilgan so‘zlar</span>
+    </div>
+    <div class="stat">
+      <div class="stat-icon">🏆</div>
+      <strong>0</strong>
+      <span>Jami ball</span>
+    </div>
+  </section>
+
+  <p class="subtitle">
+    Bu ko‘rsatkichlar hozircha namunaviy.
+  </p>
+</div>
+</section>
+  <p style="text-align:center;color:#697393;font-size:10px;margin-top:25px">EDUFINANCE · LEARN SOMETHING EVERY DAY</p>
+</main>
+
+<button class="profile-fab" onclick="openProfile()" aria-label="Profil">☺<small>PROFIL</small></button>
+
+<nav class="bottom-nav">
+  <div class="nav-inner">
+    <button class="nav-item active" onclick="goTo('home',this)"><span class="nav-icon">⌂</span><span data-i18n="home">Bosh sahifa</span></button>
+    <button class="nav-item" onclick="goTo('courses',this)"><span class="nav-icon">▤</span><span data-i18n="learn">O‘rganish</span></button>
+    <button class="nav-item" onclick="openTool('vocab')"><span class="nav-icon">📖</span><span data-i18n="vocab">Lug‘at</span></button>
+    <button class="nav-item" onclick="goTo('results',this)"><span class="nav-icon">◷</span><span data-i18n="results">Natijalar</span></button>
+  </div>
+</nav>
+
+<div class="overlay" id="profileOverlay" onclick="overlayClick(event)">
+  <section class="sheet">
+    <div class="sheet-head"><h2 data-i18n="profileTitle">Shaxsiy profil</h2><button class="close" onclick="closeProfile()">×</button></div>
+    <div class="profile-card">
+      <div class="avatar" id="avatar">D</div>
+      <div><strong id="profileName">Foydalanuvchi</strong><small id="profileId">EduFinance a’zosi</small></div>
+    </div>
+    <div class="setting-label" data-i18n="preferences">SHAXSIY SOZLAMALAR</div>
+    <div class="setting"><span class="emoji">🌐</span><div class="detail"><strong data-i18n="language">Ilova tili</strong><small data-i18n="languageD">O‘zingizga qulay tilni tanlang</small></div>
+      <select id="languageSelect" onchange="changeLanguage(this.value)" aria-label="Ilova tili">
+        <option value="uz">O‘zbek</option><option value="en">English</option><option value="ru">Русский</option>
+      </select>
+    </div>
+    <button class="setting" onclick="showMessage('Bildirishnoma sozlamalarini keyingi bosqichda ulaymiz.')"><span class="emoji">🔔</span><div class="detail"><strong data-i18n="notifications">Bildirishnomalar</strong><small data-i18n="notificationsD">Dars va maqsad eslatmalari</small></div><span>›</span></button>
+    <button class="setting" onclick="showMessage('Hisob va xavfsizlik bo‘limi keyingi bosqichda ulanadi.')"><span class="emoji">🔐</span><div class="detail"><strong data-i18n="security">Hisob va xavfsizlik</strong><small data-i18n="securityD">Profil va ma’lumotlar</small></div><span>›</span></button>
+    <button class="setting" onclick="showMessage('Yordam: bot orqali administratorga murojaat qilishingiz mumkin.')"><span class="emoji">💬</span><div class="detail"><strong data-i18n="help">Yordam markazi</strong><small data-i18n="helpD">Savollar va takliflar</small></div><span>›</span></button>
+    <div class="notice" data-i18n="privacy">Profil ma’lumotlari Telegram taqdim etgan ma’lumotlar asosida ko‘rsatiladi. Haqiqiy natijalar va sozlamalar keyinchalik hisobingizga ulanadi.</div>
+  </section>
+</div>
+
+<script> 
+/* PREMIUM SCROLL REVEAL */
+const revealItems = document.querySelectorAll(
+  '.hero, .stat, .goal, .course, .tool, .premium-banner'
+);
+
+revealItems.forEach((item, index) => {
+  item.classList.add('reveal');
+  item.style.transitionDelay = `${(index % 4) * 65}ms`;
+});
+
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealItems.forEach(item => observer.observe(item));
+} else {
+  revealItems.forEach(item => item.classList.add('visible'));
+}
+
+/* PROFILE OPEN ANIMATION */
+const profileOverlay = document.getElementById('profileOverlay');
+
+const originalOpenProfile = openProfile;
+openProfile = function () {
+  profileOverlay.classList.add('show');
+};
+
+const originalCloseProfile = closeProfile;
+closeProfile = function () {
+  profileOverlay.classList.remove('show');
+};
+
+/* BUTTON FEEDBACK */
+document.querySelectorAll('button').forEach(button => {
+  button.addEventListener('click', () => {
+    button.animate(
+      [
+        { filter: 'brightness(1)' },
+        { filter: 'brightness(1.18)' },
+        { filter: 'brightness(1)' }
+      ],
+      { duration: 220, easing: 'ease-out' }
+    );
+  });
+});
+
+const tg = window.Telegram?.WebApp;
+if (tg) {
+  tg.ready();
+  tg.expand();
+  try { tg.setHeaderColor('#0d1022'); tg.setBackgroundColor('#0d1022'); } catch(e) {}
+}
+
+const translations = {
+uz:{
+welcome:"SIZNING YANGI BOSQICHINGIZ",hello:"Xush kelibsiz,",subtitle:"Bugun o‘zingizning eng yaxshi versiyangizga yana bir qadam yaqinlashing.",
+featured:"TAVSIYA ETILGAN",heroTitle:"Bilimingizni yangi darajaga olib chiqing.",heroDesc:"Qisqa darslar, amaliy mashqlar va shaxsiy rivojlanish yo‘li.",startLearning:"O‘rganishni boshlash →",
+statsTitle:"Sizning rivojlanishingiz",details:"Batafsil ↗",streak:"Ketma-ket kunlar",words:"Yangi so‘zlar",points:"To‘plangan ball",goalTitle:"🎯 Bugungi maqsad",goalDesc:"20 daqiqa o‘rganish",goalHint:"Kichik qadamlar katta natijalarga olib keladi.",
+coursesTitle:"🎓 O‘quv yo‘nalishlari",allCourses:"Barchasi →",a1:"Boshlang‘ich",a1d:"Asosiy so‘zlar va jumlalar",a2:"Elementar",a2d:"Kundalik suhbatlar",b1:"O‘rta daraja",b1d:"Erkinroq muloqot",b2:"Yuqori o‘rta",b2d:"Murakkab mavzular",c1:"Ilg‘or daraja",c1d:"Akademik va professional ingliz tili",
+toolsTitle:"✨ Tezkor vositalar",vocab:"Lug‘at",vocabD:"Yangi so‘zlar",quiz:"Mini test",quizD:"Bilimingizni sinang",results:"Natijalar",resultsD:"O‘sishingiz",premiumTitle:"Chegaralardan tashqariga chiqing",premiumDesc:"Maxsus darslar, chuqur statistika va yanada keng imkoniyatlar.",premiumButton:"Imkoniyatlarni ko‘rish →",
+home:"Bosh sahifa",learn:"O‘rganish",profileTitle:"Shaxsiy profil",preferences:"SHAXSIY SOZLAMALAR",language:"Ilova tili",languageD:"O‘zingizga qulay tilni tanlang",notifications:"Bildirishnomalar",notificationsD:"Dars va maqsad eslatmalari",security:"Hisob va xavfsizlik",securityD:"Profil va ma’lumotlar",help:"Yordam markazi",helpD:"Savollar va takliflar",privacy:"Profil ma’lumotlari Telegram taqdim etgan ma’lumotlar asosida ko‘rsatiladi. Haqiqiy natijalar va sozlamalar keyinchalik hisobingizga ulanadi."
+},
+en:{
+welcome:"YOUR NEXT CHAPTER",hello:"Welcome,",subtitle:"Take one more step toward becoming your best self today.",featured:"FEATURED",heroTitle:"Take your knowledge to the next level.",heroDesc:"Short lessons, practical exercises and a personal learning journey.",startLearning:"Start learning →",
+statsTitle:"Your progress",details:"Details ↗",streak:"Day streak",words:"New words",points:"Points earned",goalTitle:"🎯 Today's goal",goalDesc:"Learn for 20 minutes",goalHint:"Small steps lead to big results.",coursesTitle:"🎓 Learning paths",allCourses:"View all →",a1:"Beginner",a1d:"Basic words and phrases",a2:"Elementary",a2d:"Everyday conversations",b1:"Intermediate",b1d:"More confident communication",b2:"Upper intermediate",b2d:"Advanced topics",c1:"Advanced",c1d:"Academic and professional English",toolsTitle:"✨ Quick tools",vocab:"Vocabulary",vocabD:"New words",quiz:"Mini quiz",quizD:"Test your knowledge",results:"Results",resultsD:"Your progress",premiumTitle:"Go beyond limits",premiumDesc:"Exclusive lessons, detailed stats and more possibilities.",premiumButton:"Explore benefits →",home:"Home",learn:"Learn",profileTitle:"Your profile",preferences:"PERSONAL SETTINGS",language:"App language",languageD:"Choose your preferred language",notifications:"Notifications",notificationsD:"Lesson and goal reminders",security:"Account & security",securityD:"Profile and data",help:"Help center",helpD:"Questions and suggestions",privacy:"Profile details are based on information provided by Telegram. Real progress and settings will be connected to your account later."
+},
+ru:{
+welcome:"ВАШ СЛЕДУЮЩИЙ ЭТАП",hello:"Добро пожаловать,",subtitle:"Сделайте ещё один шаг к своей лучшей версии уже сегодня.",featured:"РЕКОМЕНДУЕМ",heroTitle:"Поднимите свои знания на новый уровень.",heroDesc:"Короткие уроки, практика и персональный путь обучения.",startLearning:"Начать обучение →",
+statsTitle:"Ваш прогресс",details:"Подробнее ↗",streak:"Дней подряд",words:"Новых слов",points:"Набрано баллов",goalTitle:"🎯 Цель на сегодня",goalDesc:"20 минут обучения",goalHint:"Маленькие шаги ведут к большим результатам.",coursesTitle:"🎓 Направления обучения",allCourses:"Все курсы →",a1:"Начальный",a1d:"Основные слова и фразы",a2:"Элементарный",a2d:"Повседневные разговоры",b1:"Средний",b1d:"Уверенное общение",b2:"Выше среднего",b2d:"Сложные темы",c1:"Продвинутый",c1d:"Академический и деловой английский",toolsTitle:"✨ Быстрые инструменты",vocab:"Словарь",vocabD:"Новые слова",quiz:"Мини-тест",quizD:"Проверьте знания",results:"Результаты",resultsD:"Ваш прогресс",premiumTitle:"Больше возможностей",premiumDesc:"Особые уроки, подробная статистика и новые возможности.",premiumButton:"Посмотреть возможности →",home:"Главная",learn:"Обучение",profileTitle:"Личный профиль",preferences:"ЛИЧНЫЕ НАСТРОЙКИ",language:"Язык приложения",languageD:"Выберите удобный язык",notifications:"Уведомления",notificationsD:"Напоминания об уроках и целях",security:"Аккаунт и безопасность",securityD:"Профиль и данные",help:"Центр помощи",helpD:"Вопросы и предложения",privacy:"Данные профиля отображаются на основе информации Telegram. Реальные результаты и настройки будут подключены позже."
+}
+};
+
+function showMessage(message){
+  if(tg && typeof tg.showAlert==="function") tg.showAlert(message);
+  else alert(message);
+}
+function openProfile(){document.getElementById('profileOverlay').classList.add('show')}
+function closeProfile(){document.getElementById('profileOverlay').classList.remove('show')}
+function overlayClick(e){if(e.target.id==='profileOverlay')closeProfile()}
+function notifyUser(){showMessage('Yangi bildirishnomalar hozircha yo‘q.')}
+
+function goTo(section, button) {
+  const screens = {
+    home: 'screen-home',
+    courses: 'screen-courses',
+    results: 'screen-results'
+  };
+
+  const target = document.getElementById(screens[section]);
+  if (!target) return;
+
+  const current = document.querySelector('.app-screen.active-screen');
+  const order = { home: 0, courses: 1, results: 2 };
+
+  const direction =
+    !current || order[section] >=
+    (Object.keys(screens).find(
+      key => screens[key] === current.id
+    ) ? order[Object.keys(screens).find(
+      key => screens[key] === current.id
+    )] : 0)
+      ? 'screen-enter-right'
+      : 'screen-enter-left';
+
+  document.querySelectorAll('.app-screen').forEach(screen => {
+    screen.classList.remove(
+      'active-screen',
+      'screen-enter-left',
+      'screen-enter-right'
+    );
+  });
+
+  target.classList.add('active-screen', direction);
+  target.querySelectorAll('.reveal').forEach(el => {
+    el.classList.add('visible');
+  });
+
+  window.scrollTo(0, 0);
+
+  const navIndex = { home: 0, courses: 1, results: 3 };
+  document.querySelectorAll('.nav-item').forEach((item, index) => {
+    item.classList.toggle('active', index === navIndex[section]);
+  });
+}
+
+function openCourse(level){showMessage(level+' kursi tanlandi. Darslar va testlarni keyingi bosqichda ulaymiz.')}
+function openTool(tool){
+  if(tool==='vocab')showMessage('Lug‘at bo‘limiga saqlash, tarjima va takrorlash imkoniyatlarini qo‘shamiz.');
+  else showMessage('Mini test bo‘limiga savollar va ball tizimini qo‘shamiz.');
+}
+function changeLanguage(lang){
+  const dict=translations[lang]||translations.uz;
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key=el.getAttribute('data-i18n');
+    if(dict[key])el.textContent=dict[key];
+  });
+  try{localStorage.setItem('edufinance-language',lang)}catch(e){}
+}
+function init(){
+  const user=tg?.initDataUnsafe?.user;
+  const name=user?.first_name || 'Do‘stim';
+  document.getElementById('userName').textContent=name;
+  document.getElementById('profileName').textContent=[user?.first_name,user?.last_name].filter(Boolean).join(' ')||'Mehmon';
+  document.getElementById('avatar').textContent=(name.trim()[0]||'D').toUpperCase();
+  document.getElementById('profileId').textContent=user?.username?'@'+user.username:'EduFinance a’zosi';
+  if(user?.id) document.getElementById('profileId').textContent += ' · Telegram';
+  let lang='uz';
+  try{lang=localStorage.getItem('edufinance-language')||'uz'}catch(e){}
+  document.getElementById('languageSelect').value=lang;
+  changeLanguage(lang);
+}
+init();
+
+function sendPremiumRequest() {
+  if (window.Telegram && window.Telegram.WebApp) {
+    Telegram.WebApp.ready();
+    Telegram.WebApp.sendData("premium_request");
+  } else {
+    alert("Iltimos, EDUFINANCE ilovasini Telegram ichidan oching.");
+  }
+}
+
+</script> 
+</body>
+</html>
